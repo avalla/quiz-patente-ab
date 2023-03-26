@@ -1,0 +1,102 @@
+[
+  {
+    "id_chapter": 1,
+    "descrizione": "Definizioni stradali e di traffico"
+  },
+  {
+    "id_chapter": 2,
+    "descrizione": "Segnali di pericolo"
+  },
+  {
+    "id_chapter": 3,
+    "descrizione": "Segnali di divieto"
+  },
+  {
+    "id_chapter": 4,
+    "descrizione": "Segnali di obbligo"
+  },
+  {
+    "id_chapter": 5,
+    "descrizione": "Segnali di precedenza"
+  },
+  {
+    "id_chapter": 6,
+    "descrizione": "Segnaletica orizzontale"
+  },
+  {
+    "id_chapter": 7,
+    "descrizione": "Segnalazioni semaforiche"
+  },
+  {
+    "id_chapter": 8,
+    "descrizione": "Segnali di indicazione"
+  },
+  {
+    "id_chapter": 9,
+    "descrizione": "Segnali complementari"
+  },
+  {
+    "id_chapter": 10,
+    "descrizione": "Pannelli integrativi dei segnali"
+  },
+  {
+    "id_chapter": 11,
+    "descrizione": "Limiti di velocità"
+  },
+  {
+    "id_chapter": 12,
+    "descrizione": "Distanza di sicurezza"
+  },
+  {
+    "id_chapter": 13,
+    "descrizione": "Norme sulla circolazione dei veicoli"
+  },
+  {
+    "id_chapter": 14,
+    "descrizione": "Esempi di precedenza (ordine di precedenza agli incroci)"
+  },
+  {
+    "id_chapter": 15,
+    "descrizione": "Norme sul sorpasso"
+  },
+  {
+    "id_chapter": 16,
+    "descrizione": "Fermata, sosta, arresto e partenza"
+  },
+  {
+    "id_chapter": 17,
+    "descrizione": "Ingombro della carreggiata"
+  },
+  {
+    "id_chapter": 18,
+    "descrizione": "Uso delle luci"
+  },
+  {
+    "id_chapter": 19,
+    "descrizione": "Dispositivi di equipaggiamento: funzione ed uso"
+  },
+  {
+    "id_chapter": 20,
+    "descrizione": "Patenti di guida"
+  },
+  {
+    "id_chapter": 21,
+    "descrizione": "Comportamenti per prevenire  incidenti stradali"
+  },
+  {
+    "id_chapter": 22,
+    "descrizione": "Guida in relazione alle qualità e condizioni fisiche e psichiche"
+  },
+  {
+    "id_chapter": 23,
+    "descrizione": "Responsabilità civile, penale, amministrativa"
+  },
+  {
+    "id_chapter": 24,
+    "descrizione": "Limitazione dei consumi"
+  },
+  {
+    "id_chapter": 25,
+    "descrizione": "Elementi costitutivi del veicolo importanti per la sicurezza"
+  }
+]
