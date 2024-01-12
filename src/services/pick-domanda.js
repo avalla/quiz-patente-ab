@@ -5,7 +5,7 @@ function pick(arr) {
   return arr[~~(Math.random() * arr.length)]
 }
 
-function pickDomanda(id_argomento) {
+function pickDomanda(id_argomento = null) {
   const domande = getDomande(Number(id_argomento));
   const domanda = pick(domande);
   const argomento = getArgomento(domanda.id_chapter);
