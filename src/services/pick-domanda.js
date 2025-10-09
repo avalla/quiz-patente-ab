@@ -1,5 +1,5 @@
 import getDomande from './get-domande';
-import getArgomento from './get-argomento';
+import normalizeDomanda from './normalize-domanda';
 
 function pick(arr) {
   return arr[~~(Math.random() * arr.length)]
@@ -8,13 +8,7 @@ function pick(arr) {
 function pickDomanda(id_argomento = null) {
   const domande = getDomande(Number(id_argomento));
   const domanda = pick(domande);
-  const argomento = getArgomento(domanda.id_chapter);
-  const image = ('000' + domanda.image).slice(-3)
-  return {
-    ...domanda,
-    image,
-    argomento: argomento.descrizione
-  };
+  return normalizeDomanda(domanda);
 }
 
 export default pickDomanda;
