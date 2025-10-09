@@ -7,6 +7,9 @@
 - Works entirely offline once built: questions, hints, and traffic sign images are bundled with the app.
 - Topic selector shows each chapter in Italian followed by the English translation, including a full mock test mode.
 
+## English Translations
+- To see English translations of questions and hints, it is suggested that you install the **Immersive Translate** browser extension. It allows one to easily turn on/off the translations and pick different translation enginges (e.g., Google Translate, Microsoft Translator).
+
 ## Quick start (new users)
 1. **Install Node.js** – Version 18 or newer is recommended. The easiest path is to download it from [nodejs.org](https://nodejs.org/).
 2. **Clone the project**
