@@ -6,6 +6,7 @@
 - Single page application to practice the official Italian Ministry AB license quizzes from a locally stored dataset.
 - Interface built with Chakra UI, optimized for quick use on both desktop and mobile devices.
 - Offline ready: questions, hints, and traffic sign images ship as static bundles.
+- Topic selector displays each chapter in Italian with an English translation, including the mock test option.
 
 ## Tech Stack
 - Vite + React 18 with StrictMode and `react-dom/client` for rendering.

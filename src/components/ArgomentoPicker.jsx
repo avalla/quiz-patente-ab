@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Select } from '@chakra-ui/react';
 import argomenti from '../services/chapters.json';
 import { MOCK_TEST_VALUE } from '../constants/mock-test';
+import { getChapterLabel, getMockTestLabel } from '../i18n/chapters';
 
 function ArgomentoPicker({ value, onChange, includeMockOption }) {
     const selectValue = value ?? '';
@@ -13,14 +14,14 @@ function ArgomentoPicker({ value, onChange, includeMockOption }) {
             onChange={(event) => onChange(event.target.value)}
         >
             {includeMockOption && (
-                <option value={MOCK_TEST_VALUE}>Mock Test</option>
+                <option value={MOCK_TEST_VALUE}>{getMockTestLabel()}</option>
             )}
             {argomenti.map(argomento => (
                 <option
                     key={argomento.id_chapter}
                     value={argomento.id_chapter}
                 >
-                    {argomento.id_chapter}. {argomento.descrizione}
+                    {getChapterLabel(argomento)}
                 </option>
             ))}
         </Select>
