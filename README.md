@@ -1,60 +1,62 @@
 # AB Driving License Quiz
-
+- It is possible to run this by just using Netlify.
 [![Netlify Status](https://api.netlify.com/api/v1/badges/34ee311d-07e0-4c82-8032-e1a53e1ae203/deploy-status)](https://app.netlify.com/sites/quiz-patente/deploys)
 
-## Overview
-- Single page application to practice the official Italian Ministry AB license quizzes from a locally stored dataset.
-- Interface built with Chakra UI, optimized for quick use on both desktop and mobile devices.
-- Offline ready: questions, hints, and traffic sign images ship as static bundles.
-- Topic selector displays each chapter in Italian with an English translation, including the mock test option.
+## What is this?
+- A single page practice tool built for the Italian AB driving theory exam.
+- Works entirely offline once built: questions, hints, and traffic sign images are bundled with the app.
+- Topic selector shows each chapter in Italian followed by the English translation, including a full mock test mode.
 
-## Tech Stack
-- Vite + React 18 with StrictMode and `react-dom/client` for rendering.
-- Chakra UI provides layout primitives, accessible components, and color mode handling via `ColorModeSwitcher`.
-- Static JSON datasets (`questions.json`, `chapters.json`, `hints.json`) and assets under `public/images`.
-- No routing: the app runs on a single view whose state is managed through React hooks.
+## Quick start (new users)
+1. **Install Node.js** – Version 18 or newer is recommended. The easiest path is to download it from [nodejs.org](https://nodejs.org/).
+2. **Clone the project**
+   ```bash
+   git clone https://github.com/<your-account>/quiz-patente-ab.git
+   cd quiz-patente-ab
+   ```
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
+   Yarn also works (`yarn install`), but the repo ships with an `npm` lockfile.
+4. **Run the app locally**
+   ```bash
+   npm run dev
+   ```
+   Then open the printed URL (by default `http://localhost:5173`) in your browser.
 
-## Code Structure
-- `src/App.jsx`: core of the app; controls the current question, counters, errors, and topic changes.
-- `src/main.jsx`: entry point loaded by `index.html`, injects `ColorModeScript` and mounts `App` in StrictMode.
-- `src/components/ArgomentoPicker.jsx`: Chakra select populated with topics pulled from `services/chapters.json`.
-- `src/components/Domanda/Domanda.jsx`: shows the question text, images, true/false buttons, and invokes success or error callbacks.
-- `src/components/Figura/Figura.jsx`: zero pads the image code (`000` + id) and renders `/images/<id>.gif`.
-- `src/components/Hint/Hint.jsx`: opens a Chakra modal with title and HTML description retrieved from `get-hint.js`.
-- `src/services/`: data access layer with pure utilities (`pick-domanda.js`, `get-domande.js`, `get-argomento.js`, `get-hint.js`).
-- `private/`: Node scripts that rebuild datasets and images by querying `quizpatenteapp.com` (not used at runtime).
+### Everyday commands
+- `npm run dev` – start the Vite dev server with hot reload.
+- `npm run build` – create the production bundle inside `dist/`.
+- `npm run preview` – serve the production build locally.
+- `npm run mock:test` – smoke-check the mock test configuration.
 
-## Application Flow
-- On start `App` calls `pickDomanda` without filters, generates a random question, and shows a spinner until data is ready.
-- Selecting a topic through `ArgomentoPicker` recalculates the question, fetching only entries with the matching `id_chapter`.
-- `Domanda` compares the user answer with `answer`; it uses `useToast` for instant feedback and updates the total counter (`totali`) or the list of wrong answers (`errate`).
-- `Hint` pairs the question with the theory (`theory`) and displays the HTML string inside the modal; if empty it falls back to "Missing hint".
-- `Figura` renders the image only if the numeric code is greater than zero, avoiding blank space otherwise.
+## Using the quiz
+- **Practice mode:** choose any chapter from the dropdown to drill random questions from that area.
+- **Mock test:** pick the “Prova d'esame simulata — Mock test” option for a 30-question exam (one per chapter plus five weighted towards tricky topics). Scores and restart controls appear once the run finishes.
+- **Hints:** the lightbulb button opens a modal with theory explanations when available.
+- **Images:** traffic-sign questions display a picture when the dataset specifies one.
 
-## Datasets and Services
-- `questions.json`: array of questions with `id`, `id_chapter`, `image`, `question`, `answer`, `theory`. Filtered via `getDomande`, which accepts `0` to include every topic.
-- `chapters.json`: list of chapters with descriptions, used to populate the dropdown menu and display the title inside `Domanda`.
-- `hints.json`: hints linked by `theory`, may contain HTML (rendered through `dangerouslySetInnerHTML`).
-- `public/images`: GIF traffic signs named with three digits (`001.gif`, `240.gif`, ...); `Figura` builds the relative path.
-- `private/fetch-*.js`: optional Node scripts based on Axios and `lodash.uniqby` that download new questions, hints, and images (require external APIs and do not run in the browser).
+## Feature highlights
+- Chakra UI for responsive, accessible layout with light/dark mode.
+- Randomized question selection with on-screen counters for total attempts and mistakes.
+- Local datasets (`questions.json`, `chapters.json`, `hints.json`, `public/images`) so the app never depends on live APIs during use.
+- Optional Node scripts under `private/` to refresh datasets from the upstream source (not required for daily development).
 
-## State and Scoring Logic
-- `totali` starts at zero and increases only after each correct answer, tracking how many questions were attempted.
-- `errate` is an array of unique ids; `addErrate` avoids duplicates so the counter stays accurate.
-- Visual feedback comes from success or error toasts and the hint modal, which players can open at any time.
+## Under the hood
+- **Tech stack:** Vite + React 18 (StrictMode), Chakra UI, and a pure-function data layer.
+- **Key files:**
+  - `src/App.jsx` – orchestrates modes, question state, scoring, and mock exams.
+  - `src/components/ArgomentoPicker.jsx` – bilingual topic dropdown with mock test entry.
+  - `src/components/Domanda/Domanda.jsx` – renders the question, answer buttons, and feedback.
+  - `src/services/*` – utilities for loading and normalizing questions, looking up chapters, and composing mock tests.
+- **State flow:** questions are picked via `pickDomanda` (practice) or `buildMockTest` (exam). Answers update the total counter and track incorrect IDs to avoid duplicate penalties.
 
-## Local Development
-- Requirements: Node 16+ and Yarn 1.x.
-- Install dependencies: `yarn install`.
-- Development mode: `yarn dev` launches Vite with hot reload (default port 5173).
-- Production build: `yarn build` outputs static assets in `dist/`, ready for Netlify.
-- Preview build: `yarn preview` serves the optimized build for local QA.
+## Deploy notes
+- Netlify automatically builds and deploys from `main` (see badge above). You can also push the `dist/` folder to any static host.
+- If you refresh datasets or assets, rebuild the production bundle (`npm run build`) before deploying so the changes ship together.
 
-## Deploy Notes
-- Deployments are automated by Netlify (see badge above). Uploading the `dist/` folder serves the app entirely from the CDN.
-- Keep static assets aligned: adding questions or images requires regenerating the JSON payloads and committing the assets.
-
-## Future Enhancements
-- Add persistent tracking of correct and incorrect answers (e.g., localStorage) to analyze progress over time.
-- Include per-chapter statistics (error rate) and an exam mode with a timer plus a fixed number of questions.
-- Localize the interface and improve accessibility for screen readers (dedicated aria-labels, modal focus trapping).
+## Roadmap ideas
+- Persist answer history (e.g., `localStorage`) to track progress over time.
+- Add chapter-level stats, timed exam mode, and printable results.
+- Expand localization and accessibility (screen-reader optimisations, keyboard shortcuts).
