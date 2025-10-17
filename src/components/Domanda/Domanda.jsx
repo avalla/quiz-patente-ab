@@ -1,10 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Stack, Center, Button, Container, useToast, Heading, Text } from '@chakra-ui/react';
+import {
+  Stack,
+  Center,
+  Button,
+  Container,
+  useToast,
+  Heading,
+  Text,
+} from '@chakra-ui/react';
 import Hint from '../Hint/Hint';
 import Figura from '../Figura/Figura';
 
-function Domanda({ id, id_chapter, argomento, image, question, answer, theory, totali, errate, onSuccess, onError }) {
+function Domanda({
+  id,
+  id_chapter,
+  argomento,
+  image,
+  question,
+  answer,
+  theory,
+  totali,
+  errate,
+  progress,
+  onSuccess,
+  onError,
+}) {
   const toast = useToast();
 
   function clickHandler(value) {
@@ -30,6 +51,11 @@ function Domanda({ id, id_chapter, argomento, image, question, answer, theory, t
   return (
     <>
       <Container w='full'>
+        {progress && (
+          <Text fontSize='md' marginBottom={1}>
+            Question {progress.current} / {progress.total}
+          </Text>
+        )}
         <Text fontSize='2xl' marginBottom={3}>
           <strong>{totali}</strong> domande | <strong>{errate}</strong> errate
         </Text>
@@ -61,7 +87,9 @@ function Domanda({ id, id_chapter, argomento, image, question, answer, theory, t
   );
 }
 
-Domanda.defaultProps = {};
+Domanda.defaultProps = {
+  progress: null,
+};
 Domanda.propTypes = {
   id: PropTypes.number.isRequired,
   id_chapter: PropTypes.number.isRequired,
@@ -72,6 +100,10 @@ Domanda.propTypes = {
   answer: PropTypes.number.isRequired,
   totali: PropTypes.number.isRequired,
   errate: PropTypes.number.isRequired,
+  progress: PropTypes.shape({
+    current: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+  }),
   onSuccess: PropTypes.func.isRequired,
   onError: PropTypes.func.isRequired,
 };

@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mock:test": "node scripts/mock-test-check.js"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
